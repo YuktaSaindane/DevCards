@@ -2,6 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import { seedData } from './data/store';
 import decksRouter from './routes/decks';
+import cardsRouter from './routes/cards';
 import flashcardsRouter from './routes/flashcards';
 import { HealthResponse } from './types/models';
 
@@ -24,6 +25,7 @@ app.get('/api/health', (req, res: express.Response<HealthResponse>) => {
 
 // Routes
 app.use('/api/decks', decksRouter);
+app.use('/api/decks', cardsRouter);
 app.use('/api/flashcards', flashcardsRouter);
 
 // 404 handler
@@ -51,6 +53,9 @@ const startServer = () => {
     console.log(`   GET  /api/decks/:deckId`);
     console.log(`   PUT  /api/decks/:deckId`);
     console.log(`   DELETE /api/decks/:deckId`);
+    console.log(`   GET  /api/decks/:deckId/cards`);
+    console.log(`   POST /api/decks/:deckId/cards`);
+    console.log(`   DELETE /api/decks/:deckId/cards/:cardId`);
     console.log(`   GET  /api/decks/:deckId/flashcards`);
     console.log(`   POST /api/decks/:deckId/flashcards`);
     console.log(`   PUT  /api/flashcards/:cardId`);

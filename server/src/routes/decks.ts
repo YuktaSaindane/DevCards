@@ -3,7 +3,6 @@ import { v4 as uuidv4 } from 'uuid';
 import {
   decks,
   findDeckById,
-  getFlashcardsByDeckId,
   deleteDeckAndCards,
 } from '../data/store';
 import { validateBody, createDeckSchema, updateDeckSchema } from '../utils/validate';
@@ -32,6 +31,7 @@ router.post('/', (req: Request, res: Response<Deck | ErrorResponse>) => {
       id: uuidv4(),
       title: data.title,
       description: data.description,
+      cards: [],
       createdAt: now,
       updatedAt: now,
     };
@@ -52,10 +52,9 @@ router.get('/:deckId', (req: Request, res: Response<DeckWithCardCount | ErrorRes
     return res.status(404).json({ error: 'not_found' });
   }
   
-  const cards = getFlashcardsByDeckId(deckId);
   const deckWithCount: DeckWithCardCount = {
     ...deck,
-    cardCount: cards.length,
+    cardCount: deck.cards.length,
   };
   
   res.json(deckWithCount);

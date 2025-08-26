@@ -10,6 +10,12 @@ export const updateDeckSchema = z.object({
   description: z.string().optional(),
 });
 
+export const createCardSchema = z.object({
+  front: z.string().min(1, 'Front is required'),
+  back: z.string().min(1, 'Back is required'),
+});
+
+// Keep old schemas for backward compatibility
 export const createFlashcardSchema = z.object({
   question: z.string().min(1, 'Question is required'),
   answer: z.string().min(1, 'Answer is required'),
