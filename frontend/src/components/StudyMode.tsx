@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { Deck, Flashcard, StudySession } from '../types';
+import React, { useState, useEffect, useCallback } from 'react';
+import { Deck, StudySession } from '../types';
 import { api } from '../services/api';
 import FlashCard from './FlashCard';
 
@@ -14,11 +14,7 @@ const StudyMode: React.FC<StudyModeProps> = ({ deck, onExit }) => {
   const [error, setError] = useState<string | null>(null);
   const [showAnswer, setShowAnswer] = useState(false);
 
-  useEffect(() => {
-    initializeSession();
-  }, [deck.id]);
-
-  const initializeSession = async () => {
+  const initializeSession = useCallback(async () => {
     try {
       setLoading(true);
       setError(null);
@@ -45,7 +41,11 @@ const StudyMode: React.FC<StudyModeProps> = ({ deck, onExit }) => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [deck.id]);
+
+  useEffect(() => {
+    initializeSession();
+  }, [initializeSession]);
 
   const handleCardFlip = () => {
     setShowAnswer(!showAnswer);

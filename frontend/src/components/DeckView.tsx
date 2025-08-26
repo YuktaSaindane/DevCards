@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Deck, Flashcard } from '../types';
 import { api } from '../services/api';
 import FlashCard from './FlashCard';
@@ -16,11 +16,7 @@ const DeckView: React.FC<DeckViewProps> = ({ deck, onBack, onStudy }) => {
   const [error, setError] = useState<string | null>(null);
   const [showCreateForm, setShowCreateForm] = useState(false);
 
-  useEffect(() => {
-    loadFlashcards();
-  }, [deck.id]);
-
-  const loadFlashcards = async () => {
+  const loadFlashcards = useCallback(async () => {
     try {
       setLoading(true);
       setError(null);
@@ -31,7 +27,11 @@ const DeckView: React.FC<DeckViewProps> = ({ deck, onBack, onStudy }) => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [deck.id]);
+
+  useEffect(() => {
+    loadFlashcards();
+  }, [loadFlashcards]);
 
   const handleDeleteFlashcard = async (cardId: string) => {
     try {
