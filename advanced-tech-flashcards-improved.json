@@ -1,0 +1,191 @@
+{
+  "title": "Advanced Full-Stack Development Flashcards",
+  "description": "Professional-level React, TypeScript, and modern web development concepts for portfolio showcase",
+  "totalCards": 46,
+  "flashcards": [
+    {
+      "question": "How does React's Concurrent Features improve performance?",
+      "answer": "Enables time-slicing, interruptible rendering, automatic batching, and Suspense for data fetching. Allows React to pause, resume, and prioritize updates for better UX."
+    },
+    {
+      "question": "When would you use useMemo vs useCallback vs React.memo?",
+      "answer": "useMemo: expensive calculations. useCallback: stable function references for child props. React.memo: prevent re-renders of components with same props. Each targets different optimization scenarios."
+    },
+    {
+      "question": "Explain the difference between useLayoutEffect and useEffect.",
+      "answer": "useLayoutEffect runs synchronously after DOM mutations but before browser paint. useEffect runs asynchronously after paint. Use useLayoutEffect for DOM measurements to prevent flicker."
+    },
+    {
+      "question": "How would you implement a custom hook for complex state management?",
+      "answer": "Combine useReducer for complex state logic, useContext for sharing state, and custom hooks for reusable stateful logic. Example: useAsyncState hook managing loading, data, and error states."
+    },
+    {
+      "question": "What are React Server Components and their benefits?",
+      "answer": "Components that run on the server, reducing bundle size, enabling server-side data fetching, and improving performance. They complement client components for hybrid rendering strategies."
+    },
+    {
+      "question": "Explain conditional types with a practical example.",
+      "answer": "type ApiResponse<T> = T extends string ? { message: T } : { data: T }. Enables type-level branching logic based on input types for more precise API typing."
+    },
+    {
+      "question": "How do mapped types enhance code safety?",
+      "answer": "Transform existing types: type Partial<T> = { [K in keyof T]?: T[K] }. Creates new types by iterating over properties, enabling utilities like Required, Readonly, Pick."
+    },
+    {
+      "question": "What are template literal types used for?",
+      "answer": "Create string literal types with interpolation: type EventName<T> = `on${Capitalize<T>}`. Useful for CSS-in-JS, API endpoints, and type-safe string manipulation."
+    },
+    {
+      "question": "Explain the benefits of const assertions in TypeScript.",
+      "answer": "const arr = [1, 2] as const creates readonly tuple [1, 2] instead of number[]. Provides more specific types and prevents mutations, improving type inference."
+    },
+    {
+      "question": "How would you optimize a large list with thousands of items?",
+      "answer": "Use react-window/react-virtualized for virtualization, implement infinite scrolling, memoize list items, use keys properly, and consider server-side pagination with search/filtering."
+    },
+    {
+      "question": "Explain different code-splitting strategies in React.",
+      "answer": "Route-based: React.lazy() with dynamic imports. Component-based: Split heavy components. Third-party: Separate vendor bundles. Use Suspense for loading states and error boundaries."
+    },
+    {
+      "question": "What are the core Web Vitals and how to optimize them?",
+      "answer": "LCP (Largest Contentful Paint): optimize images, reduce server response time. FID (First Input Delay): minimize JS blocking. CLS (Cumulative Layout Shift): reserve space for dynamic content."
+    },
+    {
+      "question": "How does tree shaking work and how to optimize it?",
+      "answer": "Eliminates dead code by analyzing ES6 import/export. Optimize: use ES modules, avoid default exports for libraries, configure webpack/rollup properly, use production builds."
+    },
+    {
+      "question": "Design a REST API for a multi-tenant SaaS application.",
+      "answer": "Use tenant isolation via subdomains or headers, implement RBAC, version APIs (/v1/), use pagination, rate limiting, proper HTTP status codes, and OpenAPI documentation."
+    },
+    {
+      "question": "When would you choose GraphQL over REST?",
+      "answer": "Multiple data sources, complex nested relationships, mobile apps needing specific fields, real-time subscriptions, and when over-fetching/under-fetching are concerns."
+    },
+    {
+      "question": "How do you handle API versioning and backward compatibility?",
+      "answer": "Semantic versioning, deprecation headers, maintaining multiple versions, gradual migration strategies, feature flags, and clear breaking change communication to consumers."
+    },
+    {
+      "question": "Explain microservices communication patterns.",
+      "answer": "Synchronous: HTTP/gRPC for real-time data. Asynchronous: message queues (RabbitMQ, Kafka) for decoupling. Event sourcing for audit trails. API gateways for routing and auth."
+    },
+    {
+      "question": "What are the trade-offs of serverless architectures?",
+      "answer": "Pros: auto-scaling, pay-per-use, no server management. Cons: cold starts, vendor lock-in, timeout limits, debugging complexity, and potential higher costs at scale."
+    },
+    {
+      "question": "How do you handle state in serverless functions?",
+      "answer": "External storage (Redis, DynamoDB), database connections pooling, environment variables for config, stateless design patterns, and caching strategies for performance."
+    },
+    {
+      "question": "Explain the difference between CDN and Edge Computing.",
+      "answer": "CDN: caches static content globally. Edge Computing: runs code closer to users, enabling dynamic processing with low latency. Edge functions complement CDNs for personalization."
+    },
+    {
+      "question": "Design a CI/CD pipeline for a React application.",
+      "answer": "Stages: lint/test → build → security scan → deploy to staging → integration tests → deploy to production. Use feature flags, blue-green deployments, and automated rollbacks."
+    },
+    {
+      "question": "How do you implement zero-downtime deployments?",
+      "answer": "Blue-green deployments, rolling updates, feature flags for gradual rollouts, health checks, load balancer configuration, and database migration strategies."
+    },
+    {
+      "question": "What monitoring and observability tools would you implement?",
+      "answer": "Application: Sentry for errors, DataDog/New Relic for APM. Infrastructure: Prometheus + Grafana. Logs: ELK stack. User experience: RUM tools. Custom dashboards for business metrics."
+    },
+    {
+      "question": "How do you prevent XSS attacks in React applications?",
+      "answer": "React escapes by default, avoid dangerouslySetInnerHTML, use Content Security Policy, sanitize user input, validate on server-side, and use HTTPS for all communications."
+    },
+    {
+      "question": "Implement secure authentication with JWT tokens.",
+      "answer": "Short-lived access tokens (15 min), refresh tokens in httpOnly cookies, proper logout clearing both tokens, token rotation, and storing sensitive data server-side only."
+    },
+    {
+      "question": "What are the OWASP Top 10 security risks for web apps?",
+      "answer": "Injection, broken authentication, sensitive data exposure, XXE, broken access control, security misconfiguration, XSS, insecure deserialization, vulnerable components, insufficient logging."
+    },
+    {
+      "question": "How would you scale a React app to handle 1M+ users?",
+      "answer": "CDN for static assets, code splitting, lazy loading, caching strategies, horizontal scaling with load balancers, database optimization, and microservices architecture."
+    },
+    {
+      "question": "Explain different caching strategies for web applications.",
+      "answer": "Browser cache, CDN cache, application cache (Redis), database query cache, and HTTP caching headers. Each layer serves different performance optimization goals."
+    },
+    {
+      "question": "How do you handle real-time features at scale?",
+      "answer": "WebSockets with Socket.io, message brokers (Redis Pub/Sub), horizontal scaling with sticky sessions, graceful degradation, and consideration of WebRTC for P2P scenarios."
+    },
+    {
+      "question": "Design a comprehensive testing strategy for a React app.",
+      "answer": "Unit tests (Jest), component tests (React Testing Library), integration tests (Cypress), visual regression tests, performance tests, and accessibility audits with automated CI checks."
+    },
+    {
+      "question": "How do you test custom hooks effectively?",
+      "answer": "Use @testing-library/react-hooks with renderHook, test different scenarios and edge cases, mock dependencies, test cleanup effects, and verify re-render behavior."
+    },
+    {
+      "question": "What's the difference between shallow and deep rendering in testing?",
+      "answer": "Shallow: renders only the component, not children (Enzyme). Deep: renders full component tree. React Testing Library uses deep rendering by default for realistic user interactions."
+    },
+    {
+      "question": "Explain Progressive Web App (PWA) essential features.",
+      "answer": "Service workers for offline functionality, Web App Manifest for installation, responsive design, HTTPS requirement, and progressive enhancement for cross-platform compatibility."
+    },
+    {
+      "question": "How do Web Workers improve application performance?",
+      "answer": "Run JavaScript in background threads, prevent UI blocking for heavy computations, enable true parallelism, useful for data processing, image manipulation, and crypto operations."
+    },
+    {
+      "question": "What are the benefits of HTTP/2 for web applications?",
+      "answer": "Multiplexing eliminates head-of-line blocking, server push reduces round trips, header compression saves bandwidth, and binary protocol improves parsing efficiency."
+    },
+    {
+      "question": "Compare Redux, Zustand, and Recoil for state management.",
+      "answer": "Redux: predictable, time-travel debugging, large ecosystem. Zustand: lightweight, less boilerplate. Recoil: atomic state, excellent for complex dependency graphs. Choose based on complexity."
+    },
+    {
+      "question": "When would you use Context vs external state management?",
+      "answer": "Context: theme, auth, small shared state. External libraries: complex state logic, time-travel debugging, middleware needs, performance-critical updates, or large applications."
+    },
+    {
+      "question": "Implement optimistic updates in a React application.",
+      "answer": "Update UI immediately, store original state, send API request, revert on failure, and show success confirmation. Enhances perceived performance and user experience."
+    },
+    {
+      "question": "Explain the difference between Promise.all and Promise.allSettled.",
+      "answer": "Promise.all fails fast if any promise rejects. Promise.allSettled waits for all promises to settle, returning results and rejections. Use allSettled when partial success is acceptable."
+    },
+    {
+      "question": "How do you implement proper error boundaries in React?",
+      "answer": "Class components with componentDidCatch and getDerivedStateFromError. Catch errors in render, lifecycle methods, and constructors. Cannot catch async errors or event handlers."
+    },
+    {
+      "question": "What are the practical applications of Proxy in JavaScript?",
+      "answer": "State management libraries (Vue 3 reactivity), API mocking, validation, property access logging, implementing computed properties, and creating DSLs with transparent interfaces."
+    },
+    {
+      "question": "How do you handle database migrations in production?",
+      "answer": "Backward-compatible changes, blue-green deployments, feature flags, gradual rollouts, rollback strategies, data validation, and coordination between app and schema changes."
+    },
+    {
+      "question": "Explain different database scaling strategies.",
+      "answer": "Vertical scaling (more powerful hardware), horizontal scaling (sharding), read replicas, caching layers, connection pooling, and choosing appropriate database types for use cases."
+    },
+    {
+      "question": "How do you approach technical debt in a growing codebase?",
+      "answer": "Regular code reviews, refactoring sprints, technical debt tracking, impact assessment, gradual improvement with feature development, and team education on best practices."
+    },
+    {
+      "question": "Design a system for A/B testing in a React application.",
+      "answer": "Feature flags service, user segmentation, metrics collection, statistical significance testing, gradual rollouts, and integration with analytics platforms for data-driven decisions."
+    },
+    {
+      "question": "How do you mentor junior developers effectively?",
+      "answer": "Pair programming, code reviews with explanations, setting clear learning goals, providing challenging but achievable tasks, encouraging questions, and sharing architectural decision reasoning."
+    }
+  ]
+}

@@ -1,0 +1,189 @@
+{
+  "title": "React Interview Prep: Beginner to Expert",
+  "description": "Progressive difficulty questions covering React fundamentals to senior-level system design",
+  "totalCards": 44,
+  "difficulty_levels": [
+    "BEGINNER (Entry-level developer)",
+    "INTERMEDIATE (2-3 years experience)",
+    "ADVANCED (Senior developer)",
+    "EXPERT (Staff/Principal engineer)"
+  ],
+  "flashcards": [
+    {
+      "question": "What is React and why would you use it?",
+      "answer": "React is a JavaScript library for building user interfaces. Benefits: Component reusability, virtual DOM for performance, large ecosystem, strong community support, and declarative programming style that makes code predictable."
+    },
+    {
+      "question": "Explain the difference between props and state in React.",
+      "answer": "Props: Data passed from parent to child component (read-only). State: Internal component data that can change over time. Props are like function parameters, state is like local variables that trigger re-renders when updated."
+    },
+    {
+      "question": "What is JSX and how does it work?",
+      "answer": "JSX is a syntax extension that lets you write HTML-like code in JavaScript. It gets compiled to React.createElement() calls. Example: <div>Hello</div> becomes React.createElement(\"div\", null, \"Hello\")."
+    },
+    {
+      "question": "How do you handle events in React?",
+      "answer": "Use camelCase event handlers like onClick, onChange. React uses SyntheticEvents (cross-browser wrapper). Example: <button onClick={(e) => console.log(\"clicked\")}>Click me</button>. Always use arrow functions or bind to preserve \"this\"."
+    },
+    {
+      "question": "What is the difference between let, const, and var?",
+      "answer": "var: function-scoped, hoisted, can be redeclared. let: block-scoped, hoisted but not initialized, can be reassigned. const: block-scoped, hoisted but not initialized, cannot be reassigned (but objects/arrays can be mutated)."
+    },
+    {
+      "question": "Explain arrow functions and when to use them.",
+      "answer": "Shorter syntax: (a, b) => a + b. They don't have their own \"this\" (inherit from parent scope). Use for: callbacks, short functions, when you need lexical \"this\". Don't use for: methods, constructors, when you need \"arguments\" object."
+    },
+    {
+      "question": "What is the difference between == and === in JavaScript?",
+      "answer": "== does type coercion (converts types): \"5\" == 5 is true. === strict equality (no conversion): \"5\" === 5 is false. Always use === to avoid unexpected bugs. Same applies to != vs !==."
+    },
+    {
+      "question": "When would you use useEffect and what are its common patterns?",
+      "answer": "useEffect runs after render. Common patterns: 1) Data fetching: useEffect(() => fetchData(), []) 2) Subscriptions: return cleanup function 3) Dependencies: [deps] to control when it runs 4) Empty array [] = runs once, no array = runs every render."
+    },
+    {
+      "question": "How do you optimize React components to prevent unnecessary re-renders?",
+      "answer": "Use React.memo for functional components, useMemo for expensive calculations, useCallback for stable function references, proper key props in lists, and split state to minimize re-render scope."
+    },
+    {
+      "question": "Explain useState vs useReducer - when to use each?",
+      "answer": "useState: Simple state (strings, booleans, numbers). useReducer: Complex state with multiple sub-values, state logic involves multiple actions, or when next state depends on previous state. useReducer is like useState + Redux patterns."
+    },
+    {
+      "question": "What is prop drilling and how do you solve it?",
+      "answer": "Passing props through multiple component layers that don't need them. Solutions: 1) React Context for global state 2) State management libraries (Redux, Zustand) 3) Component composition 4) Render props pattern."
+    },
+    {
+      "question": "How do you handle loading states and errors in API calls?",
+      "answer": "Track three states: loading, data, error. Example: const [state, setState] = useState({loading: false, data: null, error: null}). Set loading=true before fetch, then update with data or error. Show spinners for loading, error messages for failures."
+    },
+    {
+      "question": "Explain Promises vs async/await - when to use each?",
+      "answer": "Promises: .then().catch() chains, good for single operations. async/await: makes async code look synchronous, easier error handling with try/catch, better for multiple sequential operations. async/await is built on Promises."
+    },
+    {
+      "question": "How do you prevent memory leaks in React applications?",
+      "answer": "Clean up in useEffect return function: clear timers, cancel API requests, unsubscribe from events. Use AbortController for fetch requests, check if component is still mounted before setState."
+    },
+    {
+      "question": "How does React's Concurrent Features improve performance?",
+      "answer": "Think of it like multitasking on your phone. React can now pause rendering a heavy component (like a complex chart) to handle urgent user input (like typing), then resume the chart later. This prevents the \"frozen\" UI feeling users hate."
+    },
+    {
+      "question": "When would you use useMemo vs useCallback vs React.memo?",
+      "answer": "useMemo: Cache expensive calculations (like filtering 10k items). useCallback: Cache functions passed to child components to prevent unnecessary re-renders. React.memo: Wrap components that re-render too often with same props (like a heavy sidebar)."
+    },
+    {
+      "question": "Walk me through how you would build a scalable component library.",
+      "answer": "Start with design tokens (colors, spacing), create base components (Button, Input), use TypeScript for props, Storybook for documentation, automated testing, semantic versioning, and publish to npm. Consider theming and accessibility from day one."
+    },
+    {
+      "question": "How would you implement code splitting in a large React application?",
+      "answer": "Route-level splitting with React.lazy() and Suspense, component-level for heavy widgets, vendor bundle separation. Use webpack bundle analyzer to identify large modules. Preload critical routes, lazy load others."
+    },
+    {
+      "question": "Explain how you would handle real-time data updates in a React app.",
+      "answer": "WebSockets for live updates, useEffect to establish connection, custom hook to manage subscription state, cleanup on unmount. Consider using libraries like Socket.io for reliability, fallback to polling if WebSocket fails."
+    },
+    {
+      "question": "How do you ensure type safety when fetching data from APIs?",
+      "answer": "Define response interfaces, use type guards or validation libraries (Zod), handle loading/error states with discriminated unions. Example: type ApiState = {status: \"loading\"} | {status: \"success\", data: User[]} | {status: \"error\", error: string}"
+    },
+    {
+      "question": "Explain closures with a practical React example.",
+      "answer": "Function that remembers variables from outer scope. Common in React: event handlers capturing state. Example: onClick={() => handleClick(item.id)} - the arrow function \"closes over\" item.id, remembering it even after render finishes."
+    },
+    {
+      "question": "How would you debug performance issues in a React application?",
+      "answer": "React DevTools Profiler to identify slow components, check unnecessary re-renders, use browser Performance tab, audit bundle size with webpack-bundle-analyzer, check for memory leaks in useEffect cleanup."
+    },
+    {
+      "question": "Design a frontend architecture for an e-commerce application.",
+      "answer": "Micro-frontends or monorepo with: shared component library, separate apps for customer/admin, state management (Redux/Zustand), API layer with caching, CDN for assets, monitoring and error tracking, A/B testing framework."
+    },
+    {
+      "question": "How would you implement authentication in a single-page application?",
+      "answer": "JWT tokens: short-lived access token (15 min) for API calls, longer refresh token (7 days) in httpOnly cookie. Store tokens securely, redirect to login on expiry, implement auto-refresh, clear tokens on logout."
+    },
+    {
+      "question": "Walk through your process for optimizing a slow React application.",
+      "answer": "Profile with React DevTools, identify bottlenecks, implement React.memo/useMemo/useCallback, code splitting, lazy loading, optimize bundle size, check for memory leaks, implement virtualization for large lists."
+    },
+    {
+      "question": "How do you make technical decisions in a team environment?",
+      "answer": "Gather requirements, research solutions, create RFC with pros/cons, seek team input, consider maintainability and team expertise, prototype if needed, document decision and rationale. Balance technical excellence with pragmatism."
+    },
+    {
+      "question": "Describe how you would migrate a large legacy application to React.",
+      "answer": "Incremental approach: identify boundaries, start with leaf components, create adapter layer, migrate page by page, maintain parallel routing, comprehensive testing strategy, rollback plan, team training, documentation."
+    },
+    {
+      "question": "How do you ensure code quality across a large engineering team?",
+      "answer": "Automated linting/formatting (ESLint, Prettier), comprehensive testing strategy, code review guidelines, architecture documentation, pair programming, tech talks, style guides, automated CI/CD checks."
+    },
+    {
+      "question": "Design a monitoring strategy for production React applications.",
+      "answer": "Error tracking (Sentry), performance monitoring (Web Vitals), user analytics, real user monitoring (RUM), synthetic testing, logging strategy, alerting thresholds, incident response procedures, regular performance audits."
+    },
+    {
+      "question": "Explain how you would implement server-side rendering with React.",
+      "answer": "Use Next.js or custom setup with renderToString(). Benefits: Better SEO, faster initial page load. Challenges: hydration mismatches, server/client code differences. Use getServerSideProps for dynamic data, getStaticProps for static content."
+    },
+    {
+      "question": "How do you handle complex form validation in React?",
+      "answer": "Use libraries like React Hook Form or Formik. Implement schema validation (Yup/Zod), real-time feedback, async validation for uniqueness checks, proper error states, accessibility with aria-labels, and debounced validation for better UX."
+    },
+    {
+      "question": "Describe your approach to testing a complex React application.",
+      "answer": "Test pyramid: Many unit tests (pure functions), some integration tests (user flows), few E2E tests. Use React Testing Library for user-centric tests, Mock Service Worker for API mocking, visual regression tests for UI consistency."
+    },
+    {
+      "question": "How would you implement a design system at scale?",
+      "answer": "Start with design tokens (colors, typography, spacing), build atomic components, use TypeScript for API consistency, Storybook for documentation, automated visual testing, versioning strategy, and migration guides for breaking changes."
+    },
+    {
+      "question": "Explain micro-frontends and when you would use them.",
+      "answer": "Independent deployable frontend modules owned by different teams. Use when: large organization, different tech stacks needed, independent team scaling. Challenges: shared state, routing, consistent UX, bundle duplication."
+    },
+    {
+      "question": "How do you secure a React application against common vulnerabilities?",
+      "answer": "XSS prevention (CSP headers, input sanitization), secure authentication (httpOnly cookies), HTTPS everywhere, dependency scanning, secure headers, input validation on client AND server, regular security audits."
+    },
+    {
+      "question": "Walk through your performance optimization strategy for React apps.",
+      "answer": "Measure first (Lighthouse, React DevTools), optimize bundles (code splitting, tree shaking), implement caching strategies, optimize images/assets, use service workers, monitor Core Web Vitals, progressive loading techniques."
+    },
+    {
+      "question": "How would you implement internationalization (i18n) in a React app?",
+      "answer": "Use libraries like react-i18next, extract all text strings, implement locale switching, handle pluralization rules, RTL support for Arabic/Hebrew, date/number formatting, lazy load translation files, fallback languages."
+    },
+    {
+      "question": "Tell me about a time you had to make a difficult technical decision.",
+      "answer": "STAR method: Situation (legacy codebase), Task (modernize), Action (evaluated options, consulted team, prototyped), Result (improved performance, team buy-in). Focus on process, collaboration, and measurable outcomes."
+    },
+    {
+      "question": "How do you stay updated with rapidly changing frontend technologies?",
+      "answer": "Follow key voices on Twitter, subscribe to newsletters (React Status, JavaScript Weekly), attend conferences/meetups, contribute to open source, experiment with side projects, read RFC documents, participate in tech communities."
+    },
+    {
+      "question": "Describe a challenging bug you solved and your debugging process.",
+      "answer": "Systematic approach: reproduce consistently, isolate the problem, check recent changes, use debugging tools (React DevTools, browser debugger), create minimal reproduction, research similar issues, document solution for team."
+    },
+    {
+      "question": "How do you handle disagreements about technical approaches?",
+      "answer": "Listen to all perspectives, focus on data and requirements, create prototypes if needed, consider long-term maintainability, document trade-offs, seek compromise, and respect final decisions while maintaining open communication."
+    },
+    {
+      "question": "What are your thoughts on the future of React and frontend development?",
+      "answer": "React Server Components changing server/client boundaries, increased focus on performance (Core Web Vitals), better dev experience with tools like Vite, TypeScript becoming standard, edge computing growth, AI-assisted development."
+    },
+    {
+      "question": "How do you evaluate whether to adopt a new technology or library?",
+      "answer": "Consider: community support, maintenance activity, learning curve, team expertise, project requirements, long-term viability, bundle size impact, migration path. Prototype first, evaluate in context of specific use case."
+    },
+    {
+      "question": "Explain the trade-offs between different React meta-frameworks.",
+      "answer": "Next.js: Full-featured, great DX, Vercel ecosystem. Remix: Web standards focus, nested routing, progressive enhancement. Gatsby: Static generation, GraphQL layer. Choose based on use case: dynamic vs static, team preferences, hosting constraints."
+    }
+  ]
+}

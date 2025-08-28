@@ -86,11 +86,11 @@ export const seedData = () => {
     updatedAt: now,
   };
   
-  // Advanced Technical Deck for Portfolio Showcase
+  // React Fundamentals Interview Deck
   const advancedTechDeck: Deck = {
     id: uuidv4(),
-    title: 'Advanced Full-Stack Development',
-    description: 'Professional-level React, TypeScript, and modern web development concepts',
+    title: 'React Interview Fundamentals',
+    description: 'Essential React concepts and questions commonly asked in interviews',
     cards: createAdvancedTechCards(),
     createdAt: now,
     updatedAt: now,
