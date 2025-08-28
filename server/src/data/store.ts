@@ -1,5 +1,6 @@
 import { v4 as uuidv4 } from 'uuid';
 import { Deck, Flashcard, Card } from '../types/models';
+import { createAdvancedTechCards } from './advanced-tech-cards';
 
 // In-memory storage
 export const decks: Deck[] = [];
@@ -85,7 +86,17 @@ export const seedData = () => {
     updatedAt: now,
   };
   
-  decks.push(deck1, deck2, deck3);
+  // Advanced Technical Deck for Portfolio Showcase
+  const advancedTechDeck: Deck = {
+    id: uuidv4(),
+    title: 'Advanced Full-Stack Development',
+    description: 'Professional-level React, TypeScript, and modern web development concepts',
+    cards: createAdvancedTechCards(),
+    createdAt: now,
+    updatedAt: now,
+  };
+
+  decks.push(deck1, deck2, deck3, advancedTechDeck);
   
   const totalCards = decks.reduce((total, deck) => total + deck.cards.length, 0);
   console.log(`Seeded ${decks.length} decks and ${totalCards} cards`);

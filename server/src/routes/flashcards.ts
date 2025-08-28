@@ -18,9 +18,15 @@ import {
 
 const router = Router();
 
+// Test route to verify flashcards router is working
+router.get('/test-flashcards', (req: Request, res: Response) => {
+  res.json({ message: 'Flashcards router is working!' });
+});
+
 // GET /api/decks/:deckId/flashcards - List cards for a deck (backward compatibility)
 router.get('/decks/:deckId/flashcards', (req: Request, res: Response<Flashcard[] | ErrorResponse>) => {
   const { deckId } = req.params;
+  console.log(`🔍 Flashcards route called for deckId: ${deckId}`);
   
   // Check if deck exists
   const deck = findDeckById(deckId);

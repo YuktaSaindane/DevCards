@@ -26,7 +26,7 @@ app.get('/api/health', (req, res: express.Response<HealthResponse>) => {
 // Routes
 app.use('/api/decks', decksRouter);
 app.use('/api/decks', cardsRouter);
-app.use('/api/flashcards', flashcardsRouter);
+app.use('/api', flashcardsRouter);
 
 // 404 handler
 app.use('*', (req, res) => {
