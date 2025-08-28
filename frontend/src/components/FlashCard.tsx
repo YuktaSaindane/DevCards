@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
-import { Flashcard } from '../types';
+import { Flashcard, Card } from '../types';
+
+type FlashCardData = Flashcard | Card;
 
 interface FlashCardProps {
-  flashcard: Flashcard;
+  flashcard: FlashCardData;
   showAnswer?: boolean;
   onFlip?: () => void;
-  onEdit?: (flashcard: Flashcard) => void;
+  onEdit?: (flashcard: FlashCardData) => void;
   onDelete?: (cardId: string) => void;
   showControls?: boolean;
 }
@@ -20,6 +22,15 @@ const FlashCard: React.FC<FlashCardProps> = ({
 }) => {
   const [isFlipped, setIsFlipped] = useState(showAnswer);
   const [isAnimating, setIsAnimating] = useState(false);
+
+  // Helper functions to handle both Card and Flashcard types
+  const getQuestion = () => {
+    return 'front' in flashcard ? flashcard.front : flashcard.question;
+  };
+
+  const getAnswer = () => {
+    return 'back' in flashcard ? flashcard.back : flashcard.answer;
+  };
 
   const handleFlip = () => {
     if (isAnimating) return;
@@ -45,14 +56,10 @@ const FlashCard: React.FC<FlashCardProps> = ({
   };
 
   return (
-    <div className="relative perspective-1000">
+    <div className="relative perspective-1000 group">
       <div
         onClick={handleFlip}
-        className={`
-          relative w-full h-64 cursor-pointer transform-gpu transition-transform duration-300 ease-in-out
-          ${isAnimating ? (isFlipped ? 'rotateY-90' : 'rotateY-90') : 'rotateY-0'}
-          preserve-3d
-        `}
+        className="relative w-full h-72 cursor-pointer transform-gpu transition-all duration-500 ease-out hover:scale-105"
         style={{
           transformStyle: 'preserve-3d',
           transform: isFlipped ? 'rotateY(180deg)' : 'rotateY(0deg)',
@@ -60,43 +67,63 @@ const FlashCard: React.FC<FlashCardProps> = ({
       >
         {/* Front of card */}
         <div
-          className={`
-            absolute inset-0 w-full h-full bg-white rounded-lg border-2 border-blue-200 shadow-lg
-            flex flex-col justify-center items-center p-6 text-center backface-hidden
-            ${isFlipped ? 'opacity-0' : 'opacity-100'}
-          `}
+          className="absolute inset-0 w-full h-full bg-gradient-to-br from-white to-blue-50 rounded-2xl border border-blue-200/50 shadow-xl flex flex-col justify-center items-center p-8 text-center backdrop-blur-sm"
           style={{
             backfaceVisibility: 'hidden',
             transform: 'rotateY(0deg)',
           }}
         >
-          <div className="text-sm text-blue-600 font-medium mb-2">Question</div>
-          <div className="text-lg font-semibold text-gray-900 leading-relaxed">
-            {flashcard.question}
+          {/* Question icon */}
+          <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-200">
+            <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
           </div>
-          <div className="absolute bottom-4 text-xs text-gray-400">
-            Click to reveal answer
+          
+          <div className="text-sm text-blue-600 font-semibold mb-3 uppercase tracking-wide">Question</div>
+          <div className="text-lg font-semibold text-gray-900 leading-relaxed max-w-sm">
+            {getQuestion()}
+          </div>
+          
+          {/* Flip hint */}
+          <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2">
+            <div className="flex items-center text-xs text-gray-400 bg-white/80 px-3 py-2 rounded-full">
+              <svg className="w-4 h-4 mr-1 animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4" />
+              </svg>
+              Click to reveal
+            </div>
           </div>
         </div>
 
         {/* Back of card */}
         <div
-          className={`
-            absolute inset-0 w-full h-full bg-green-50 rounded-lg border-2 border-green-200 shadow-lg
-            flex flex-col justify-center items-center p-6 text-center backface-hidden
-            ${isFlipped ? 'opacity-100' : 'opacity-0'}
-          `}
+          className="absolute inset-0 w-full h-full bg-gradient-to-br from-green-50 to-emerald-50 rounded-2xl border border-green-200/50 shadow-xl flex flex-col justify-center items-center p-8 text-center backdrop-blur-sm"
           style={{
             backfaceVisibility: 'hidden',
             transform: 'rotateY(180deg)',
           }}
         >
-          <div className="text-sm text-green-600 font-medium mb-2">Answer</div>
-          <div className="text-lg font-semibold text-gray-900 leading-relaxed">
-            {flashcard.answer}
+          {/* Answer icon */}
+          <div className="w-12 h-12 bg-gradient-to-br from-green-500 to-emerald-600 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-200">
+            <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
           </div>
-          <div className="absolute bottom-4 text-xs text-gray-400">
-            Click to show question
+          
+          <div className="text-sm text-green-600 font-semibold mb-3 uppercase tracking-wide">Answer</div>
+          <div className="text-lg font-semibold text-gray-900 leading-relaxed max-w-sm">
+            {getAnswer()}
+          </div>
+          
+          {/* Flip hint */}
+          <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2">
+            <div className="flex items-center text-xs text-gray-400 bg-white/80 px-3 py-2 rounded-full">
+              <svg className="w-4 h-4 mr-1 animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4" />
+              </svg>
+              Show question
+            </div>
           </div>
         </div>
 
